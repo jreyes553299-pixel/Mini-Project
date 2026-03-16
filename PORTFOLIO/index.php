@@ -12,15 +12,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send_message'])) {
     if (empty($name) || empty($email) || empty($msg_body)) {
         $message = "All fields are required.";
         $message_type = "danger";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    }
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = "Please enter a valid email address.";
         $message_type = "danger";
-    } else {
+    }
+    else {
         $stmt = $pdo->prepare("INSERT INTO messages (sender_name, sender_email, message_body) VALUES (?, ?, ?)");
         if ($stmt->execute([$name, $email, $msg_body])) {
             $message = "Message sent successfully! I'll be in touch soon.";
             $message_type = "success";
-        } else {
+        }
+        else {
             $message = "Failed to send message. Please try again later.";
             $message_type = "danger";
         }
@@ -95,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send_message'])) {
                     </p>
                     <p class="hero-subtitle">
                         Currently in my 2nd year at the University of Mindanao Davao. I am passionate about full-stack
-                        development, learning in building functional websites and web applications.
+                        development but a little more into FrontEnd, learning in building functional websites and web applications.
                     </p>
                     <div class="mt-4">
                         <a href="#projects" class="btn btn-primary me-3">View Projects</a>
@@ -117,15 +120,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send_message'])) {
             <h2 class="section-title">My Projects<span style="color: var(--accent-color);">.</span></h2>
             <div class="bento-grid">
                 <?php
-                $stmt = $pdo->query("SELECT * FROM projects ORDER BY created_at DESC");
-                $projects = $stmt->fetchAll();
-                if (empty($projects)): ?>
+$stmt = $pdo->query("SELECT * FROM projects ORDER BY created_at DESC");
+$projects = $stmt->fetchAll();
+if (empty($projects)): ?>
                     <div class="col-12 text-center text-secondary py-5">
                         <span style="font-size: 3rem;">&#128194;</span>
                         <p class="mono-text">No projects added yet.</p>
                     </div>
-                <?php else:
-                    foreach ($projects as $proj): ?>
+                <?php
+else:
+    foreach ($projects as $proj): ?>
                         <div class="bento-card">
                             <img src="assets/img/projects/<?php echo htmlspecialchars($proj['image_url']); ?>"
                                 alt="<?php echo htmlspecialchars($proj['title']); ?>">
@@ -138,10 +142,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send_message'])) {
                                     style="font-size: 0.8em; text-transform: uppercase;">
                                     View Project &rarr;
                                 </a>
-                            <?php endif; ?>
+                            <?php
+        endif; ?>
                         </div>
-                    <?php endforeach;
-                endif; ?>
+                    <?php
+    endforeach;
+endif; ?>
             </div>
         </div>
     </section>
@@ -156,11 +162,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send_message'])) {
                 <div class="col-lg-6">
                     <div class="bento-card">
                         <?php
-                        $stmt = $pdo->query("SELECT * FROM skills ORDER BY proficiency_percentage DESC, skill_name ASC");
-                        $skills = $stmt->fetchAll();
-                        if (empty($skills)): ?>
+$stmt = $pdo->query("SELECT * FROM skills ORDER BY proficiency_percentage DESC, skill_name ASC");
+$skills = $stmt->fetchAll();
+if (empty($skills)): ?>
                             <p class="text-secondary mono-text mb-0 text-center py-4">No skills added yet.</p>
-                        <?php else: ?>
+                        <?php
+else: ?>
                             <div class="row g-4">
                                 <?php foreach ($skills as $skill): ?>
                                     <div class="col-md-6">
@@ -175,9 +182,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send_message'])) {
                                                 style="width: <?php echo $skill['proficiency_percentage']; ?>%;"></div>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
+                                <?php
+    endforeach; ?>
                             </div>
-                        <?php endif; ?>
+                        <?php
+endif; ?>
                     </div>
                 </div>
             </div>
@@ -195,10 +204,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send_message'])) {
                     <div class="bento-card">
                         <?php if ($message): ?>
                             <div class="alert alert-<?php echo $message_type; ?> mono-text mb-4"
-                                style="background: transparent; border: 1px solid <?php echo ($message_type == 'success') ? 'var(--accent-color)' : '#dc3545'; ?>; color: <?php echo ($message_type == 'success') ? 'var(--accent-color)' : '#ff6b6b'; ?>;">
+                                style="background: transparent; border: 1px solid <?php echo($message_type == 'success') ? 'var(--accent-color)' : '#dc3545'; ?>; color: <?php echo($message_type == 'success') ? 'var(--accent-color)' : '#ff6b6b'; ?>;">
                                 <?php echo $message; ?>
                             </div>
-                        <?php endif; ?>
+                        <?php
+endif; ?>
                         <form class="contact-form" action="#contact" method="POST">
                             <div class="row">
                                 <div class="col-md-6 form-group">
@@ -228,7 +238,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send_message'])) {
 
     <footer class="text-center py-4" style="border-top: 1px solid var(--border-color);">
         <div class="container mono-text" style="font-size: 0.8em; color: var(--text-secondary);">
-            &copy; <?php echo date('Y'); ?> DevPortfolio. All rights reserved.
+            &copy; <?php echo date('Y'); ?> Jules Henri Reyes. All rights, alrightt~~~.
         </div>
     </footer>
 
