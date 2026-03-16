@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send_message'])) {
                     </p>
                     <p class="hero-subtitle">
                         Currently in my 2nd year at the University of Mindanao Davao. I am passionate about full-stack
-                        development, specializing in building functional websites and web applications.
+                        development, learning in building functional websites and web applications.
                     </p>
                     <div class="mt-4">
                         <a href="#projects" class="btn btn-primary me-3">View Projects</a>
